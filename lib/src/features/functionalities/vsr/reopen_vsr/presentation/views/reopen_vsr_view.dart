@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wareco_2/src/features/home/home.dart';
+import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 
 class ReopenVsrView extends ConsumerWidget {
   const ReopenVsrView({Key? key}) : super(key: key);

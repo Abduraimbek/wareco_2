@@ -36,7 +36,18 @@ class FunctionalityPage extends ConsumerWidget {
     final selectedFunction = ref.watch(selectedFunctionProvider);
 
     if (selectedFunction == null) {
-      return Container();
+      return Scaffold(
+        body: Center(
+          child: Consumer(
+            builder: (context, ref, _) {
+              return MyMaxWidthButton(
+                onPressed: () => Navigator.of(context).pop(),
+                text: ref.watch(languageProvider).back,
+              );
+            },
+          ),
+        ),
+      );
     } else {
       switch (selectedFunction.functionEnum) {
         // box
@@ -94,136 +105,5 @@ class FunctionalityPage extends ConsumerWidget {
           return const VsrInformationView();
       }
     }
-  }
-}
-
-class FunctionalityPageScaffold extends ConsumerWidget {
-  const FunctionalityPageScaffold({
-    Key? key,
-    required this.loading,
-    required this.children,
-    this.withSingleChildScrollView = false,
-    this.resetPressed,
-    this.submitPressed,
-  }) : super(key: key);
-
-  final List<Widget> children;
-  final bool loading;
-  final bool withSingleChildScrollView;
-  final VoidCallback? resetPressed;
-  final VoidCallback? submitPressed;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final lan = ref.watch(languageProvider);
-    final selectedFunction = ref.watch(selectedFunctionProvider);
-
-    return WillPopScope(
-      onWillPop: () async => !loading,
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text((selectedFunction?.titleEn ?? '').toUpperCase()),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Row(
-          children: [
-            const SizedBox(width: 12),
-            Expanded(
-              child: MyMaxWidthButton(
-                onPressed: loading ? null : () => Navigator.of(context).pop(),
-                text: lan.back,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: MyMaxWidthButton(
-                onPressed: loading ? null : resetPressed,
-                text: lan.reset,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: MyMaxWidthButton(
-                onPressed: loading ? null : submitPressed,
-                text: lan.submit,
-              ),
-            ),
-            const SizedBox(width: 12),
-          ],
-        ),
-        body: withSingleChildScrollView
-            ? SingleChildScrollView(
-                padding: const EdgeInsets.only(left: 12, right: 12, top: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: children,
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.only(left: 12, right: 12, top: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: children,
-                ),
-              ),
-      ),
-    );
-  }
-}
-
-class BuildTextAndTextField extends StatelessWidget {
-  const BuildTextAndTextField({
-    Key? key,
-    required this.label,
-    this.controller,
-    this.focusNode,
-    this.keyboardType = TextInputType.none,
-    this.autofocus = false,
-    this.bottomPadding = false,
-  }) : super(key: key);
-
-  final String label;
-  final TextEditingController? controller;
-  final FocusNode? focusNode;
-  final TextInputType keyboardType;
-  final bool autofocus;
-  final bool bottomPadding;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: EdgeInsets.only(bottom: bottomPadding ? 20 : 0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              '$label:',
-              style: theme.textTheme.titleMedium,
-            ),
-          ),
-          Expanded(
-            child: TextField(
-              controller: controller,
-              focusNode: focusNode,
-              keyboardType: keyboardType,
-              autofocus: autofocus,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 12,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

@@ -7,13 +7,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const mainColor = Color(0xff0F2FEA);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        toggleableActiveColor: _mainColor,
+        toggleableActiveColor: mainColor,
         colorScheme: const ColorScheme.light(
-          primary: _mainColor,
+          primary: mainColor,
         ),
       ),
       builder: (context, child) {
@@ -33,8 +35,6 @@ class App extends StatelessWidget {
       },
     );
   }
-
-  static const _mainColor = Color(0xff0F2FEA);
 
   static const loginPage = '/login-page';
   static const homePage = '/home-page';
