@@ -8,24 +8,16 @@ class RememberMe extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: () => ref.read(loginRememberMeProvider.notifier).changeState(),
-      child: Container(
-        padding: const EdgeInsets.only(top: 10),
-        color: Colors.transparent,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Checkbox(
-              value: ref.watch(loginRememberMeProvider),
-              onChanged: (_) =>
-                  ref.read(loginRememberMeProvider.notifier).changeState(),
-            ),
-            Text(ref.watch(languageProvider).rememberMe),
-          ],
-        ),
+    return CheckboxListTile(
+      value: ref.watch(loginRememberMeProvider),
+      onChanged: (_) =>
+          ref.read(loginRememberMeProvider.notifier).changeState(),
+      title: Text(
+        ref.watch(languageProvider).rememberMe,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
+      controlAffinity: ListTileControlAffinity.leading,
+      contentPadding: EdgeInsets.zero,
     );
   }
 }

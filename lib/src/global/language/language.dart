@@ -33,6 +33,8 @@ class Language {
 
   String get reset => 'Reset';
 
+  String get ok => 'Ok';
+
   String get submit => 'Submit';
 
   String get palletId => 'Pallet ID';
@@ -52,4 +54,6 @@ class Language {
   String get vsr => 'VSR';
 
   String get inventory => 'Inventory';
+
+  String get notSelected => 'Not selected';
 }

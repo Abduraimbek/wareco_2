@@ -14,7 +14,9 @@ class _StockTakeState extends ConsumerState<StockTakeView> {
   Widget build(BuildContext context) {
     return const FunctionalityPageScaffold(
       loading: false,
-      children: [],
+      children: [
+        InventoryDropDown(),
+      ],
     );
   }
 }

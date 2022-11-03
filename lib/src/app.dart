@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:wareco_2/src/features/home/home.dart';
 import 'package:wareco_2/src/features/login/login.dart';
+import 'package:wareco_2/src/theme.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const mainColor = Color(0xff0F2FEA);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        toggleableActiveColor: mainColor,
-        colorScheme: const ColorScheme.light(
-          primary: mainColor,
-        ),
-      ),
+      theme: getMyTheme(),
       builder: (context, child) {
         return ScrollConfiguration(
           behavior: const ScrollBehavior().copyWith(

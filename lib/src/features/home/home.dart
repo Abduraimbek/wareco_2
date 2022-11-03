@@ -1,4 +1,4 @@
 export 'presentation/presentation.dart';
 
-export 'domain/function_category.dart';
-export 'domain/function.dart';
+export 'domain/menus.dart';
+export 'domain/functions.dart';

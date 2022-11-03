@@ -13,7 +13,6 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lan = ref.watch(languageProvider);
-    final categories = ref.watch(functionCategoriesProvider);
 
     return WillPopScope(
       onWillPop: () async {
@@ -29,21 +28,22 @@ class HomePage extends ConsumerWidget {
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(App.loginPage);
               },
-              icon: const Icon(Icons.logout_rounded),
+              icon: const Icon(Icons.logout_rounded, color: Colors.white),
             ),
           ],
         ),
         body: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 10, bottom: 30),
           child: Column(
             children: [
-              for (final e in categories)
+              for (final e in Menus.values)
                 BuildItem(
                   onPressed: () {
                     ref
-                        .read(homeProvider.notifier)
-                        .onCategoryPressed(context, e);
+                        .read(selectedMenuProvider.notifier)
+                        .onMenuPressed(context, e);
                   },
-                  title: e.titleEN,
+                  title: e.text,
                 ),
             ],
           ),

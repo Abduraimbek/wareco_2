@@ -12,13 +12,13 @@ class FunctionsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lan = ref.watch(languageProvider);
-    final selectedCategory = ref.watch(selectedCategoryProvider);
-    final functionsList = ref.watch(functionsByCategoryProvider);
+    final selectedMenu = ref.watch(selectedMenuProvider);
+    final functionsList = ref.watch(functionsByMenuProvider);
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text((selectedCategory?.titleEN ?? '').toUpperCase()),
+        title: Text(selectedMenu.text),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
@@ -29,14 +29,17 @@ class FunctionsPage extends ConsumerWidget {
         ),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(top: 10, bottom: 30),
         child: Column(
           children: [
             for (final e in functionsList)
               BuildItem(
                 onPressed: () {
-                  ref.read(homeProvider.notifier).onFunctionPressed(context, e);
+                  ref
+                      .read(selectedFunctionProvider.notifier)
+                      .onFunctionPressed(context, e);
                 },
-                title: e.titleEn,
+                title: e.text,
               ),
           ],
         ),

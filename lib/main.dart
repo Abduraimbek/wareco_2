@@ -8,9 +8,6 @@ Future<void> main() async {
 
   // Set Device orientation only UP
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarIconBrightness: Brightness.dark,
-  ));
 
   runApp(const ProviderScope(child: App()));
 }

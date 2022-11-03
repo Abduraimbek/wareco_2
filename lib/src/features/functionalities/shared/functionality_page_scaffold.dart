@@ -31,7 +31,7 @@ class FunctionalityPageScaffold extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text((selectedFunction?.titleEn ?? '').toUpperCase()),
+          title: Text(selectedFunction.text),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
@@ -54,7 +54,7 @@ class FunctionalityPageScaffold extends ConsumerWidget {
             Expanded(
               child: MyMaxWidthButton(
                 onPressed: loading ? null : submitPressed,
-                text: lan.submit,
+                text: lan.ok,
               ),
             ),
             const SizedBox(width: 12),
@@ -62,7 +62,12 @@ class FunctionalityPageScaffold extends ConsumerWidget {
         ),
         body: withSingleChildScrollView
             ? SingleChildScrollView(
-                padding: const EdgeInsets.only(left: 12, right: 12, top: 20),
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                  top: 20,
+                  bottom: 40,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
