@@ -25,10 +25,6 @@ class InventoryDropDown extends ConsumerWidget {
         ),
         Expanded(
           child: DropdownButtonFormField<InventoryModel?>(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12),
-            ),
             isDense: true,
             value: selectedInventory,
             onChanged: ref

@@ -12,11 +12,10 @@ class StockTakeView extends ConsumerStatefulWidget {
 class _StockTakeState extends ConsumerState<StockTakeView> {
   @override
   Widget build(BuildContext context) {
-    return const FunctionalityPageScaffold(
-      loading: false,
-      children: [
-        InventoryDropDown(),
-      ],
+    return FunctionalityPageScaffold(
+      okPressed: () {},
+      resetPressed: () {},
+      children: const [],
     );
   }
 }

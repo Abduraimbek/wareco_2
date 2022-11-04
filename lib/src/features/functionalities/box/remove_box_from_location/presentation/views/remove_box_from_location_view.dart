@@ -7,9 +7,10 @@ class RemoveBoxFromLocationView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const FunctionalityPageScaffold(
-      loading: false,
-      children: [],
+    return FunctionalityPageScaffold(
+      okPressed: () {},
+      resetPressed: () {},
+      children: const [],
     );
   }
 }

@@ -25,5 +25,10 @@ ThemeData getMyTheme() {
         ),
       ),
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: OutlineInputBorder(),
+      isDense: true,
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    ),
   );
 }
