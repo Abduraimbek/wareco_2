@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 
 import '../../repository/barcode_scan_response.dart';
 
@@ -15,6 +16,21 @@ class RemoveBoxFromPalletController extends _$RemoveBoxFromPalletController {
 
   Future<void> okPressed({required BarcodeScanResponse response}) async {
     state = const RemoveBoxFromPalletState.loading();
+
+    final wifi = await ref.read(wifiStatusProvider.notifier).checkConnection();
+    if (!wifi) {
+      state = const RemoveBoxFromPalletState.initial();
+      return;
+    }
+
+    try {
+      state = const RemoveBoxFromPalletState.success(
+        box: 'box',
+        pallet: 'pallet',
+      );
+    } catch (e) {
+      state = RemoveBoxFromPalletState.error(e.toString());
+    }
   }
 }
 
