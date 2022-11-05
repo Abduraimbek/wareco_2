@@ -28,8 +28,7 @@ class RemoveBoxFromVsrView extends ConsumerWidget {
       initial: () => data = '',
       error: (message) => data = message,
       loading: (message) => data = message,
-      success: (box, pallet) =>
-          data = 'Box "$box" removed from Pallet "$pallet".',
+      success: (box, vsr) => data = 'Box "$box" removed from VSR "$vsr".',
     );
 
     return FunctionalityPageScaffold(
