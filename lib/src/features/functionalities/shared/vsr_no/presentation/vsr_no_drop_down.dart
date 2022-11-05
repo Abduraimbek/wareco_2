@@ -4,20 +4,20 @@ import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 import 'package:wareco_2/src/global/language/language_provider.dart';
 import 'package:wareco_2/src/helpers/extensions.dart';
 
-final storeNoKey = GlobalKey<FormState>();
+final vsrNoKey = GlobalKey<FormState>();
 
-class StoreNoDropDown extends ConsumerWidget {
-  const StoreNoDropDown({super.key});
+class VsrNoDropDown extends ConsumerWidget {
+  const VsrNoDropDown({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final lan = ref.watch(languageProvider);
 
-    final storeNos = ref.watch(storeNosControllerProvider);
-    final selectedStoreNo = ref.watch(selectedStoreNoControllerProvider);
+    final vsrNos = ref.watch(vsrNosControllerProvider);
+    final selectedVsrNo = ref.watch(selectedVsrNoControllerProvider);
 
-    final list = storeNos.value ?? [];
+    final list = vsrNos.value ?? [];
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -25,19 +25,19 @@ class StoreNoDropDown extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 5),
-          child: Text('Store No.:', style: context.italicStyle),
+          child: Text('VSR No.:', style: context.italicStyle),
         ),
         Form(
-          key: storeNoKey,
-          child: DropdownButtonFormField<StoreNoModel?>(
+          key: vsrNoKey,
+          child: DropdownButtonFormField<VsrNoModel?>(
             validator: (value) {
               if (value == null) {
-                return 'Select Store No.';
+                return 'Select VSR No.';
               } else {
                 return null;
               }
             },
-            value: selectedStoreNo,
+            value: selectedVsrNo,
             items: [
               DropdownMenuItem(
                 value: null,
@@ -53,9 +53,8 @@ class StoreNoDropDown extends ConsumerWidget {
                   child: Text(e.number.toString()),
                 ),
             ],
-            onChanged: ref
-                .read(selectedStoreNoControllerProvider.notifier)
-                .selectStoreNo,
+            onChanged:
+                ref.read(selectedVsrNoControllerProvider.notifier).selectVsrNo,
           ),
         ),
       ],

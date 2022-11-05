@@ -9,3 +9,4 @@ export 'shared/store_no/store_no.dart';
 export 'shared/pallet_id/pallet_id.dart';
 export 'shared/dimensions_and_weight/dimensions_and_weight.dart';
 export 'shared/location/location.dart';
+export 'shared/vsr_no/vsr_no.dart';
