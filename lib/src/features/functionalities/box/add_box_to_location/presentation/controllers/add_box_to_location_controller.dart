@@ -22,6 +22,12 @@ class AddBoxToLocationController extends _$AddBoxToLocationController {
   Future<void> okPressed() async {
     state = const AddBoxToLocationState.loading();
 
+    final wifi = await ref.read(wifiStatusProvider.notifier).checkConnection();
+    if (!wifi) {
+      state = const AddBoxToLocationState.initial();
+      return;
+    }
+
     final location = ref.read(selectedLocationControllerProvider);
     final palletId = ref.read(selectedPalletIdControllerProvider);
 

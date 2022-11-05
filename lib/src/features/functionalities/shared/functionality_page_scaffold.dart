@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wareco_2/src/helpers/extensions.dart';
 import 'package:wareco_2/src/widgets/my_max_width_button.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../../home/home.dart';
 
@@ -23,6 +25,12 @@ class FunctionalityPageScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = ref.watch(loadingProvider);
     final selectedFunction = ref.watch(selectedFunctionProvider);
+
+    ref.listen(wifiStatusProvider, (previous, next) {
+      if (next == WifiConnectionStatus.notConnected) {
+        context.showSnackBar('WiFi not connected.');
+      }
+    });
 
     return WillPopScope(
       onWillPop: () async => !loading,
@@ -127,3 +135,27 @@ class Loading extends _$Loading {
     state = false;
   }
 }
+
+@Riverpod(keepAlive: true)
+class WifiStatus extends _$WifiStatus {
+  @override
+  WifiConnectionStatus build() {
+    return WifiConnectionStatus.notChecked;
+  }
+
+  Future<bool> checkConnection() async {
+    state = WifiConnectionStatus.checking;
+
+    final result = await Connectivity().checkConnectivity();
+
+    if (result == ConnectivityResult.wifi) {
+      state = WifiConnectionStatus.connected;
+    } else {
+      state = WifiConnectionStatus.notConnected;
+    }
+
+    return state == WifiConnectionStatus.connected;
+  }
+}
+
+enum WifiConnectionStatus { connected, notConnected, notChecked, checking }

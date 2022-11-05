@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 
-import '../controller/add_box_to_location_controller.dart';
+import '../controllers/add_box_to_location_controller.dart';
 
 class AddBoxToLocationView extends ConsumerWidget {
   const AddBoxToLocationView({super.key});
@@ -28,7 +28,9 @@ class AddBoxToLocationView extends ConsumerWidget {
           ref.read(addBoxToLocationControllerProvider.notifier).okPressed();
         }
       },
-      resetPressed: () {},
+      resetPressed: () {
+        ref.invalidate(addBoxToLocationControllerProvider);
+      },
       children: [
         Row(
           children: const [
