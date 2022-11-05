@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wareco_2/src/helpers/extensions.dart';
 
@@ -20,10 +22,13 @@ class BoxBarcodeListenerWidget extends StatefulWidget {
 
 class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
   final controller = TextEditingController();
+  Timer? debounce;
 
   @override
   void dispose() {
     controller.dispose();
+    debounce?.cancel();
+    debounce = null;
     super.dispose();
   }
 
@@ -52,7 +57,10 @@ class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
                 return null;
               },
               onChanged: (value) {
-                widget.onBarcodeListened(value);
+                if (debounce?.isActive ?? false) debounce?.cancel();
+                debounce = Timer(const Duration(milliseconds: 1000), () {
+                  widget.onBarcodeListened(value);
+                });
               },
               controller: controller,
               keyboardType: TextInputType.multiline,

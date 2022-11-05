@@ -3,6 +3,7 @@ export 'shared/functionality_page_scaffold.dart';
 export 'shared/zebra_listener_widget.dart';
 export 'shared/box_barcode_listener_widget.dart';
 export 'shared/build_result_widget.dart';
+export 'shared/build_read_only_field_widget.dart';
 
 export 'shared/inventory/inventory.dart';
 export 'shared/store_no/store_no.dart';
