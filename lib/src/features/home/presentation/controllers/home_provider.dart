@@ -15,7 +15,7 @@ List<Functions> functionsByMenu(FunctionsByMenuRef ref) {
 class SelectedFunction extends _$SelectedFunction {
   @override
   Functions build() {
-    return Functions.autoPalletize;
+    return Functions.reopenPallet;
   }
 
   void onFunctionPressed(BuildContext context, Functions function) {

@@ -19,7 +19,7 @@ class App extends StatelessWidget {
           child: _UnFocus(child: child!),
         );
       },
-      initialRoute: homePage,
+      initialRoute: functionalityPage,
       routes: <String, WidgetBuilder>{
         loginPage: (_) => const LoginPage(),
         homePage: (_) => const HomePage(),
