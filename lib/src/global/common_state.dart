@@ -16,7 +16,7 @@ class CommonState<T> with _$CommonState<T> {
 
   const factory CommonState.data({
     required T data,
-  }) = CommonDataSTate<T>;
+  }) = CommonDataState<T>;
 
   static Future<CommonState<T>> guard<T>(Future<T> Function() future) async {
     try {

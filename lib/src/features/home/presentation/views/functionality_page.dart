@@ -13,7 +13,7 @@ import 'package:wareco_2/src/features/functionalities/pallet/auto_palletize/pres
 import 'package:wareco_2/src/features/functionalities/pallet/close_pallet/presentation/views/close_pallet_view.dart';
 import 'package:wareco_2/src/features/functionalities/pallet/create_pallet_id/presentation/views/create_pallet_id_view.dart';
 import 'package:wareco_2/src/features/functionalities/pallet/remove_pallet_from_location/presentation/views/remove_pallet_from_location_view.dart';
-import 'package:wareco_2/src/features/functionalities/pallet/remove_pallet_from_vsr/presentation/views/remove_pallet_from_svr_view.dart';
+import 'package:wareco_2/src/features/functionalities/pallet/remove_pallet_from_vsr/presentation/views/remove_pallet_from_vsr_view.dart';
 import 'package:wareco_2/src/features/functionalities/pallet/reopen_pallet/presentation/views/reopen_pallet_view.dart';
 import 'package:wareco_2/src/features/functionalities/vsr/assign_carrier/presentation/views/assign_carrier_view.dart';
 import 'package:wareco_2/src/features/functionalities/vsr/assign_security_seals/presentation/views/assign_security_seals_view.dart';
