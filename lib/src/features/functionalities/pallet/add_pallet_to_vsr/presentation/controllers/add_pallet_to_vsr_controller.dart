@@ -2,15 +2,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 import 'package:wareco_2/src/global/common_state.dart';
 
-import '../../application/auto_palletize_service.dart';
-import '../../repository/auto_palletize_reponse.dart';
+import '../../application/add_pallet_to_vsr_service.dart';
+import '../../repository/add_pallet_to_vsr_response.dart';
 
-part 'auto_palletize_controller.g.dart';
+part 'add_pallet_to_vsr_controller.g.dart';
 
 @riverpod
-class AutoPalletizeController extends _$AutoPalletizeController {
+class AddPalletToVsrController extends _$AddPalletToVsrController {
   @override
-  CommonState<AutoPalletizeResponse> build() {
+  CommonState<AddPalletToVsrResponse> build() {
     return const CommonState.initial();
   }
 
@@ -23,11 +23,11 @@ class AutoPalletizeController extends _$AutoPalletizeController {
       return;
     }
 
-    final selectedLocation = ref.read(selectedLocationControllerProvider);
     final selectedStoreNo = ref.read(selectedStoreNoControllerProvider);
-    final selectedPalledId = ref.read(selectedPalletIdControllerProvider);
+    final selectedVsrNo = ref.read(selectedVsrNoControllerProvider);
+    final selectedPalletId = ref.read(selectedPalletIdControllerProvider);
 
     state = await CommonState.guard(() =>
-        ref.read(autoPalletizeServiceProvider).getAutoPalletizeResponse());
+        ref.read(addPalletToVsrServiceProvider).getAddPalletToVsrResponse());
   }
 }

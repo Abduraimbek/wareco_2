@@ -20,12 +20,14 @@ class AddBoxToLocationView extends ConsumerWidget {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (locationKey.currentState!.validate() &&
             palletIdKey.currentState!.validate() &&
             barcodeKey.currentState!.validate() &&
             dimensionsAndWeightKey.currentState!.validate()) {
-          ref.read(addBoxToLocationControllerProvider.notifier).okPressed();
+          await ref
+              .read(addBoxToLocationControllerProvider.notifier)
+              .okPressed();
         }
       },
       resetPressed: () {

@@ -19,12 +19,12 @@ class AddBoxToPalletView extends ConsumerWidget {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (storeNoKey.currentState!.validate() &&
             palletIdKey.currentState!.validate() &&
             barcodeKey.currentState!.validate() &&
             dimensionsAndWeightKey.currentState!.validate()) {
-          ref.read(addBoxToPalletControllerProvider.notifier).okPressed();
+          await ref.read(addBoxToPalletControllerProvider.notifier).okPressed();
         }
       },
       resetPressed: () {

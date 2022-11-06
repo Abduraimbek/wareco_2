@@ -19,12 +19,12 @@ class AddBoxToVsrView extends ConsumerWidget {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (storeNoKey.currentState!.validate() &&
             vsrNoKey.currentState!.validate() &&
             barcodeKey.currentState!.validate() &&
             dimensionsAndWeightKey.currentState!.validate()) {
-          ref.read(addBoxToVsrControllerProvider.notifier).okPressed();
+          await ref.read(addBoxToVsrControllerProvider.notifier).okPressed();
         }
       },
       resetPressed: () {

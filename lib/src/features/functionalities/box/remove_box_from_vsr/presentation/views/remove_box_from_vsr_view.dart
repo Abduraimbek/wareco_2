@@ -32,9 +32,9 @@ class RemoveBoxFromVsrView extends ConsumerWidget {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (response != null) {
-          ref
+          await ref
               .read(removeBoxFromVsrControllerProvider.notifier)
               .okPressed(response: response!);
         } else {

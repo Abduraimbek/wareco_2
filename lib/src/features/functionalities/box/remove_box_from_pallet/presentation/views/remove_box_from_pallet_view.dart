@@ -33,9 +33,9 @@ class RemoveBoxFromPalletView extends ConsumerWidget {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (response != null) {
-          ref
+          await ref
               .read(removeBoxFromPalletControllerProvider.notifier)
               .okPressed(response: response!);
         } else {

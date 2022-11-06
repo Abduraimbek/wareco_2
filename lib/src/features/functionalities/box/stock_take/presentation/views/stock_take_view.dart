@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 
-import 'build_store_name.dart';
 import '../controllers/stock_take_controller.dart';
 
 class StockTakeView extends ConsumerStatefulWidget {
@@ -26,12 +25,12 @@ class _StockTakeState extends ConsumerState<StockTakeView> {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (locationKey.currentState!.validate() &&
             storeNoKey.currentState!.validate() &&
             palletIdKey.currentState!.validate() &&
             barcodeKey.currentState!.validate()) {
-          ref.read(stockTakeControllerProvider.notifier).okPressed();
+          await ref.read(stockTakeControllerProvider.notifier).okPressed();
         }
       },
       resetPressed: () {
@@ -46,7 +45,7 @@ class _StockTakeState extends ConsumerState<StockTakeView> {
           ],
         ),
         const SizedBox(height: 20),
-        const BuildStoreName(),
+        const BuildStoreNameWidget(),
         const SizedBox(height: 20),
         const PalletIdDropDown(),
         const SizedBox(height: 20),

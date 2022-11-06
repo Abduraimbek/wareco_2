@@ -33,9 +33,9 @@ class RemoveBoxFromLocationView extends ConsumerWidget {
     );
 
     return FunctionalityPageScaffold(
-      okPressed: () {
+      okPressed: () async {
         if (response != null) {
-          ref
+          await ref
               .read(removeBoxFromLocationControllerProvider.notifier)
               .okPressed(response: response!);
         } else {

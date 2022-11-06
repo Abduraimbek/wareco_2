@@ -17,7 +17,7 @@ class FunctionalityPageScaffold extends ConsumerWidget {
     required this.children,
   });
 
-  final VoidCallback okPressed;
+  final FutureOr Function() okPressed;
   final VoidCallback resetPressed;
   final List<Widget> children;
 
@@ -67,8 +67,11 @@ class FunctionalityPageScaffold extends ConsumerWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: MyMaxWidthButton(
-                      onPressed:
-                          loading ? null : () => Navigator.of(context).pop(),
+                      onPressed: loading
+                          ? null
+                          : () {
+                              Navigator.of(context).pop();
+                            },
                       text: 'BACK',
                     ),
                   ),
@@ -89,7 +92,13 @@ class FunctionalityPageScaffold extends ConsumerWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: MyMaxWidthButton(
-                      onPressed: loading ? null : okPressed,
+                      onPressed: loading
+                          ? null
+                          : () async {
+                              ref.read(loadingProvider.notifier).loadingTRUE();
+                              await okPressed();
+                              ref.read(loadingProvider.notifier).loadingFALSE();
+                            },
                       text: 'OK',
                     ),
                   ),
