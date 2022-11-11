@@ -36,15 +36,9 @@ class AddBoxToLocationView extends ConsumerWidget {
       children: [
         Row(
           children: const [
-            Expanded(
-              flex: 2,
-              child: LocationDropDown(),
-            ),
+            Expanded(child: LocationDropDown()),
             SizedBox(width: 20),
-            Expanded(
-              flex: 3,
-              child: PalletIdDropDown(),
-            ),
+            Expanded(child: PalletIdDropDown()),
           ],
         ),
         const SizedBox(height: 20),

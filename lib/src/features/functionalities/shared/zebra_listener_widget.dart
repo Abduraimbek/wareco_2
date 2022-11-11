@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:vibration/vibration.dart';
 
 part 'zebra_listener_widget.g.dart';
 
@@ -28,10 +29,18 @@ class _ZebraListenerWidgetState extends ConsumerState<ZebraListenerWidget> {
   void initState() {
     super.initState();
 
-    _streamSubscription = ref
-        .read(zebraListenerRepositoryProvider)
-        .stream
-        .listen(widget.onZebraListened);
+    _streamSubscription =
+        ref.read(zebraListenerRepositoryProvider).stream.listen((event) {
+      widget.onZebraListened(event);
+      _vibrate();
+    });
+  }
+
+  Future<void> _vibrate() async {
+    final hasVibrator = await Vibration.hasVibrator();
+    if (hasVibrator != true) return;
+
+    Vibration.vibrate();
   }
 
   @override

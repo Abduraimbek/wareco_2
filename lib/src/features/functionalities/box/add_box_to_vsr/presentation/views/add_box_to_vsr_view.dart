@@ -33,15 +33,9 @@ class AddBoxToVsrView extends ConsumerWidget {
       children: [
         Row(
           children: const [
-            Expanded(
-              flex: 2,
-              child: StoreNoDropDown(),
-            ),
+            Expanded(child: StoreNoDropDown()),
             SizedBox(width: 20),
-            Expanded(
-              flex: 3,
-              child: VsrNoDropDown(),
-            ),
+            Expanded(child: VsrNoDropDown()),
           ],
         ),
         const SizedBox(height: 20),
