@@ -15,7 +15,7 @@ List<Functions> functionsByMenu(FunctionsByMenuRef ref) {
 class SelectedFunction extends _$SelectedFunction {
   @override
   Functions build() {
-    return Functions.removePalletFromVsr;
+    return Functions.updateBoxDetails;
   }
 
   void onFunctionPressed(BuildContext context, Functions function) {
@@ -28,7 +28,7 @@ class SelectedFunction extends _$SelectedFunction {
 class SelectedMenu extends _$SelectedMenu {
   @override
   Menus build() {
-    return Menus.boxFunctions;
+    return Menus.box;
   }
 
   void onMenuPressed(BuildContext context, Menus menu) {

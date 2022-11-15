@@ -9,21 +9,32 @@ import '../../home/home.dart';
 
 part 'functionality_page_scaffold.g.dart';
 
-class FunctionalityPageScaffold extends ConsumerWidget {
+class FunctionalityPageScaffold extends ConsumerStatefulWidget {
   const FunctionalityPageScaffold({
     super.key,
-    required this.okPressed,
-    required this.resetPressed,
+    required this.enterPressed,
+    required this.clearPressed,
     required this.children,
+    this.withSingleChildScrollView = true,
   });
 
-  final FutureOr Function() okPressed;
-  final VoidCallback resetPressed;
+  final FutureOr Function() enterPressed;
+  final VoidCallback clearPressed;
   final List<Widget> children;
+  final bool withSingleChildScrollView;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final loading = ref.watch(loadingProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _FunctionalityPageScaffoldState();
+}
+
+class _FunctionalityPageScaffoldState
+    extends ConsumerState<FunctionalityPageScaffold> {
+  bool loading = false;
+  bool clearPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
     final selectedFunction = ref.watch(selectedFunctionProvider);
 
     ref.listen(wifiStatusProvider, (previous, next) {
@@ -42,106 +53,106 @@ class FunctionalityPageScaffold extends ConsumerWidget {
         body: Column(
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(
-                  left: 12,
-                  right: 12,
-                  top: 20,
-                  bottom: 50,
-                ),
-                child: Consumer(
-                  builder: (context, ref, _) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: ref.watch(resetPressedProvider) ? [] : children,
-                    );
-                  },
-                ),
-              ),
+              child: widget.withSingleChildScrollView
+                  ? SingleChildScrollView(
+                      padding: const EdgeInsets.only(
+                        left: 12,
+                        right: 12,
+                        top: 20,
+                        bottom: 50,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: clearPressed ? [] : widget.children,
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                        left: 12,
+                        right: 12,
+                        top: 20,
+                        bottom: 20,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: clearPressed ? [] : widget.children,
+                      ),
+                    ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: MyMaxWidthButton(
-                      onPressed: loading
-                          ? null
-                          : () {
-                              Navigator.of(context).pop();
-                            },
-                      text: 'BACK',
-                    ),
+            Row(
+              children: [
+                const SizedBox(width: 14),
+                Expanded(
+                  child: MyMaxWidthButton(
+                    onPressed: loading ? null : _backPressed,
+                    text: 'BACK',
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: MyMaxWidthButton(
-                      onPressed: loading
-                          ? null
-                          : () {
-                              ref
-                                  .read(resetPressedProvider.notifier)
-                                  .onResetPressed();
-                              resetPressed();
-                            },
-                      text: 'RESET',
-                    ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: MyMaxWidthButton(
+                    onPressed: loading ? null : _clearPressed,
+                    text: 'CLEAR',
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: MyMaxWidthButton(
-                      onPressed: loading
-                          ? null
-                          : () async {
-                              ref.read(loadingProvider.notifier).loadingTRUE();
-                              await okPressed();
-                              ref.read(loadingProvider.notifier).loadingFALSE();
-                            },
-                      text: 'OK',
-                    ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: MyMaxWidthButton(
+                    onPressed: loading ? null : _enterPressed,
+                    text: 'ENTER',
                   ),
-                  const SizedBox(width: 12),
-                ],
-              ),
+                ),
+                const SizedBox(width: 14),
+              ],
+            ),
+            const SafeArea(
+              child: SizedBox(height: 25),
             ),
           ],
         ),
       ),
     );
   }
-}
 
-@Riverpod(keepAlive: true)
-class ResetPressed extends _$ResetPressed {
-  @override
-  bool build() {
-    return false;
+  void _backPressed() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Navigator.of(context).pop();
   }
 
-  Future<void> onResetPressed() async {
-    if (!state) {
-      state = true;
-      await Future.delayed(const Duration(milliseconds: 10));
-      state = false;
-    }
-  }
-}
+  Future<void> _clearPressed() async {
+    FocusManager.instance.primaryFocus?.unfocus();
 
-@Riverpod(keepAlive: true)
-class Loading extends _$Loading {
-  @override
-  bool build() {
-    return false;
-  }
+    widget.clearPressed();
 
-  void loadingTRUE() {
-    state = true;
+    setState(() {
+      clearPressed = true;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 10));
+
+    if (!mounted) return;
+
+    setState(() {
+      clearPressed = false;
+    });
   }
 
-  void loadingFALSE() {
-    state = false;
+  Future<void> _enterPressed() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    setState(() {
+      loading = true;
+    });
+
+    await widget.enterPressed();
+
+    if (!mounted) return;
+
+    setState(() {
+      loading = false;
+    });
   }
 }
 

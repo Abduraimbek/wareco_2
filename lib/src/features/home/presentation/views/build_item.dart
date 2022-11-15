@@ -14,7 +14,7 @@ class BuildItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
+      padding: const EdgeInsets.only(left: 14, right: 14, top: 12),
       child: MyMaxWidthButton(
         onPressed: onPressed,
         text: title,

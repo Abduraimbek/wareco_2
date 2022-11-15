@@ -1,149 +1,50 @@
 import 'menus.dart';
 
 enum Functions {
-  // boxFunctions
-  addBoxToPallet(
-    menu: Menus.boxFunctions,
-    text: 'ADD BOX TO PALLET',
-  ),
-  addBoxToVsr(
-    menu: Menus.boxFunctions,
-    text: 'ADD BOX TO VSR',
-  ),
-  addBoxToLocation(
-    menu: Menus.boxFunctions,
-    text: 'ADD BOX TO LOCATION',
-  ),
-  removeBoxFromPallet(
-    menu: Menus.boxFunctions,
-    text: 'REMOVE BOX FROM PALLET',
-  ),
-  removeBoxFromVsr(
-    menu: Menus.boxFunctions,
-    text: 'REMOVE BOX FROM VSR',
-  ),
-  removeBoxFromLocation(
-    menu: Menus.boxFunctions,
-    text: 'REMOVE BOX FROM LOCATION',
-  ),
-  stockTake(
-    menu: Menus.boxFunctions,
-    text: 'STOCK TAKE',
-  ),
+  // box
+  updateBoxDetails(Menus.box, 'UPDATE BOX DETAILS'),
 
-  // palletFunctions
-  createPalletId(
-    menu: Menus.palletFunctions,
-    text: 'CREATE PALLET ID',
-  ),
-  autoPalletize(
-    menu: Menus.palletFunctions,
-    text: 'AUTO-PALLETIZE',
-  ),
-  addPalletToVsr(
-    menu: Menus.palletFunctions,
-    text: 'ADD PALLET TO VSR',
-  ),
-  addPalletToLocation(
-    menu: Menus.palletFunctions,
-    text: 'ADD PALLET TO LOCATION',
-  ),
-  closePallet(
-    menu: Menus.palletFunctions,
-    text: 'CLOSE PALLET',
-  ),
-  reopenPallet(
-    menu: Menus.palletFunctions,
-    text: 'RE-OPEN PALLET',
-  ),
-  removePalletFromVsr(
-    menu: Menus.palletFunctions,
-    text: 'REMOVE PALLET FROM VSR',
-  ),
-  removePalletFromLocation(
-    menu: Menus.palletFunctions,
-    text: 'REMOVE PALLET FROM LOCATION',
-  ),
+  // pallet
+  autoPalletize(Menus.pallet, 'AUTO-PALLETIZE'),
+  palletBuild(Menus.pallet, 'PALLET BUILD'),
+  removeBoxFromPallet(Menus.pallet, 'REMOVE BOX FROM PALLET'),
+  closePallet(Menus.pallet, 'CLOSE PALLET'),
+  reOpenPallet(Menus.pallet, 'RE-OPEN PALLET'),
 
-  // vsrFunctions
-  createVsr(
-    menu: Menus.vsrFunctions,
-    text: 'CREATE VSR',
-  ),
-  assignCarrier(
-    menu: Menus.vsrFunctions,
-    text: 'ASSIGN CARRIER',
-  ),
-  assignSecuritySeals(
-    menu: Menus.vsrFunctions,
-    text: 'ASSIGN SECURITY SEALS',
-  ),
-  closeAndPrintVsr(
-    menu: Menus.vsrFunctions,
-    text: 'CLOSE AND PRINT VSR',
-  ),
-  vsrProofOfDelivery(
-    menu: Menus.vsrFunctions,
-    text: 'VSR PROOF OF DELIVERY',
-  ),
+  // vsr
+  createVsr(Menus.vsr, 'CREATE VSR'),
+  vsrBuild(Menus.vsr, 'VSR BUILD'),
+  removeBoxFromVsr(Menus.vsr, 'REMOVE BOX FROM VSR'),
+  removePalletFromVsr(Menus.vsr, 'REMOVE PALLET FROM VSR'),
+  closeAndPrintVsr(Menus.vsr, 'CLOSE AND PRINT VSR'),
+  vsrProofOfDelivery(Menus.vsr, 'VSR PROOF OF DELIVERY'),
+
+  // location
+  addPalletToLoc(Menus.location, 'ADD PALLET TO LOC.'),
+  removeBoxFromLoc(Menus.location, 'REMOVE BOX FROM LOC.'),
+  removePalletFromLoc(Menus.location, 'REMOVE PALLET FROM LOC.'),
+
+  // inventory
+  stockTake(Menus.inventory, 'STOCK TAKE'),
 
   // maintenance
-  assignStoreToLocation(
-    menu: Menus.maintenance,
-    text: 'ASSIGN STORE TO LOCATION',
-  ),
-  createPalletIdMaintenance(
-    menu: Menus.maintenance,
-    text: 'CREATE PALLET ID MAINTENANCE',
-  ),
-  registerCarrierVanNo(
-    menu: Menus.maintenance,
-    text: 'REGISTER CARRIER VAN NO.',
-  ),
-  reprintPalletId(
-    menu: Menus.maintenance,
-    text: 'RE-PRINT PALLET ID',
-  ),
-  reprintVsr(
-    menu: Menus.maintenance,
-    text: 'RE-PRINT VSR',
-  ),
-  reopenVsr(
-    menu: Menus.maintenance,
-    text: 'RE-OPEN VSR',
-  ),
+  assignStoreToLocation(Menus.maintenance, 'ASSIGN STORE TO LOCATION'),
+  createPalletId(Menus.maintenance, 'CREATE PALLET ID'),
+  registerCarrierVanNo(Menus.maintenance, 'REGISTER CARRIER VAN NO.'),
+  rePrintPalletId(Menus.maintenance, 'RE-PRINT PALLET ID'),
+  rePrintVsr(Menus.maintenance, 'RE-PRINT VSR'),
+  reOpenVsr(Menus.maintenance, 'RE-OPEN VSR'),
 
   // information
-  boxDetails(
-    menu: Menus.information,
-    text: 'BOX DETAILS',
-  ),
-  palletDetails(
-    menu: Menus.information,
-    text: 'PALLET DETAILS',
-  ),
-  vsrDetails(
-    menu: Menus.information,
-    text: 'VSR DETAILS',
-  ),
-  orderDetails(
-    menu: Menus.information,
-    text: 'ORDER DETAILS',
-  ),
-  storeDetails(
-    menu: Menus.information,
-    text: 'STORE DETAILS',
-  ),
-  locationDetails(
-    menu: Menus.information,
-    text: 'LOCATION DETAILS',
-  );
+  orderDetails(Menus.information, 'ORDER DETAILS'),
+  storeDetails(Menus.information, 'STORE DETAILS'),
+  locationDetails(Menus.information, 'LOCATION DETAILS'),
+  boxDetails(Menus.information, 'BOX DETAILS'),
+  palletDetails(Menus.information, 'PALLET DETAILS'),
+  vsrDetails(Menus.information, 'VSR DETAILS');
 
   final Menus menu;
   final String text;
 
-  const Functions({
-    required this.menu,
-    required this.text,
-  });
+  const Functions(this.menu, this.text);
 }

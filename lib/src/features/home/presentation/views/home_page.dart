@@ -23,30 +23,38 @@ class HomePage extends ConsumerWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(lan.appName.toUpperCase()),
-          actions: [
-            IconButton(
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(top: 15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final e in Menus.values)
+                      BuildItem(
+                        onPressed: () {
+                          ref
+                              .read(selectedMenuProvider.notifier)
+                              .onMenuPressed(context, e);
+                        },
+                        title: e.text,
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            BuildItem(
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(App.loginPage);
               },
-              icon: const Icon(Icons.logout_rounded, color: Colors.white),
+              title: 'LOGOUT',
+            ),
+            const SafeArea(
+              child: SizedBox(height: 25),
             ),
           ],
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 10, bottom: 30),
-          child: Column(
-            children: [
-              for (final e in Menus.values)
-                BuildItem(
-                  onPressed: () {
-                    ref
-                        .read(selectedMenuProvider.notifier)
-                        .onMenuPressed(context, e);
-                  },
-                  title: e.text,
-                ),
-            ],
-          ),
         ),
       ),
     );

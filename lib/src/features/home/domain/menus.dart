@@ -1,7 +1,9 @@
 enum Menus {
-  boxFunctions('BOX FUNCTIONS'),
-  palletFunctions('PALLET FUNCTIONS'),
-  vsrFunctions('VSR FUNCTIONS'),
+  box('BOX'),
+  pallet('PALLET'),
+  vsr('VSR'),
+  location('LOCATION'),
+  inventory('INVENTORY'),
   maintenance('MAINTENANCE'),
   information('INFORMATION');
 

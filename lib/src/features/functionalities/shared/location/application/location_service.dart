@@ -1,9 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wareco_2/src/features/functionalities/functionalities.dart';
+
+import '../repository/location_model.dart';
 
 part 'location_service.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 LocationService locationService(LocationServiceRef ref) {
   return LocationService();
 }

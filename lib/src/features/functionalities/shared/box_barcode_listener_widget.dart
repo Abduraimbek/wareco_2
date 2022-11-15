@@ -5,8 +5,6 @@ import 'package:wareco_2/src/helpers/extensions.dart';
 
 import 'zebra_listener_widget.dart';
 
-final barcodeKey = GlobalKey<FormState>();
-
 class BoxBarcodeListenerWidget extends StatefulWidget {
   const BoxBarcodeListenerWidget({
     super.key,
@@ -21,8 +19,14 @@ class BoxBarcodeListenerWidget extends StatefulWidget {
 }
 
 class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
-  final controller = TextEditingController();
+  late final TextEditingController controller;
   Timer? debounce;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
 
   @override
   void dispose() {
@@ -47,26 +51,23 @@ class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
             padding: const EdgeInsets.only(bottom: 5),
             child: Text('Box Barcode:', style: context.italicStyle),
           ),
-          Form(
-            key: barcodeKey,
-            child: TextFormField(
-              validator: (value) {
-                if (controller.text.isEmpty) {
-                  return 'Scan Barcode';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                if (debounce?.isActive ?? false) debounce?.cancel();
-                debounce = Timer(const Duration(milliseconds: 1000), () {
-                  widget.onBarcodeListened(value);
-                });
-              },
-              controller: controller,
-              keyboardType: TextInputType.multiline,
-              minLines: 2,
-              maxLines: 2,
-            ),
+          TextFormField(
+            validator: (value) {
+              if (controller.text.isEmpty) {
+                return 'Scan Barcode';
+              }
+              return null;
+            },
+            onChanged: (value) {
+              if (debounce?.isActive ?? false) debounce?.cancel();
+              debounce = Timer(const Duration(milliseconds: 1000), () {
+                widget.onBarcodeListened(value);
+              });
+            },
+            controller: controller,
+            keyboardType: TextInputType.multiline,
+            minLines: 2,
+            maxLines: 2,
           ),
         ],
       ),

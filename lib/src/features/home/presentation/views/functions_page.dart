@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wareco_2/src/features/home/home.dart';
-import 'package:wareco_2/src/global/language/language_provider.dart';
-import 'package:wareco_2/src/widgets/my_max_width_button.dart';
 
 import 'build_item.dart';
 
@@ -11,7 +9,6 @@ class FunctionsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lan = ref.watch(languageProvider);
     final selectedMenu = ref.watch(selectedMenuProvider);
     final functionsList = ref.watch(functionsByMenuProvider);
 
@@ -20,29 +17,37 @@ class FunctionsPage extends ConsumerWidget {
         automaticallyImplyLeading: false,
         title: Text(selectedMenu.text),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(12),
-        child: MyMaxWidthButton(
-          onPressed: () => Navigator.of(context).pop(),
-          text: lan.back,
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 10, bottom: 30),
-        child: Column(
-          children: [
-            for (final e in functionsList)
-              BuildItem(
-                onPressed: () {
-                  ref
-                      .read(selectedFunctionProvider.notifier)
-                      .onFunctionPressed(context, e);
-                },
-                title: e.text,
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(top: 15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final e in functionsList)
+                    BuildItem(
+                      onPressed: () {
+                        ref
+                            .read(selectedFunctionProvider.notifier)
+                            .onFunctionPressed(context, e);
+                      },
+                      title: e.text,
+                    ),
+                ],
               ),
-          ],
-        ),
+            ),
+          ),
+          BuildItem(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            title: 'BACK',
+          ),
+          const SafeArea(
+            child: SizedBox(height: 25),
+          ),
+        ],
       ),
     );
   }

@@ -8,8 +8,8 @@ class CreateVsrView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FunctionalityPageScaffold(
-      okPressed: () {},
-      resetPressed: () {},
+      enterPressed: () {},
+      clearPressed: () {},
       children: const [],
     );
   }
