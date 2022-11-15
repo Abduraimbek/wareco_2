@@ -4,6 +4,7 @@ import 'package:wareco_2/src/features/functionalities/box/update_box_details/vie
 import 'package:wareco_2/src/features/functionalities/information/box_details/presentation/views/box_details_view.dart';
 import 'package:wareco_2/src/features/functionalities/information/location_details/presentation/views/location_details_view.dart';
 import 'package:wareco_2/src/features/functionalities/information/order_details/presentation/views/order_details_view.dart';
+import 'package:wareco_2/src/features/functionalities/information/pallet_details/presentation/views/pallet_details_view.dart';
 import 'package:wareco_2/src/features/functionalities/information/store_details/presentation/views/store_details_view.dart';
 import 'package:wareco_2/src/features/functionalities/information/vsr_details/presentation/views/vsr_details_view.dart';
 import 'package:wareco_2/src/features/home/home.dart';
@@ -83,7 +84,7 @@ class FunctionalityPage extends ConsumerWidget {
       case Functions.boxDetails:
         return const BoxDetailsView();
       case Functions.palletDetails:
-        return Scaffold();
+        return const PalletDetailsView();
       case Functions.vsrDetails:
         return const VsrDetailsView();
     }

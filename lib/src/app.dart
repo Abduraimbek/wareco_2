@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wareco_2/src/features/functionalities/information/location_details/presentation/views/location_complete_details_page.dart';
+import 'package:wareco_2/src/features/functionalities/information/pallet_details/presentation/views/pallet_complete_details_page.dart';
 import 'package:wareco_2/src/features/functionalities/information/vsr_details/presentation/views/vsr_complete_details_page.dart';
 import 'package:wareco_2/src/features/home/home.dart';
 import 'package:wareco_2/src/features/login/login.dart';
@@ -22,13 +23,14 @@ class App extends StatelessWidget {
         );
       },
       initialRoute: homePage,
-      routes: <String, WidgetBuilder>{
+      routes: {
         loginPage: (_) => const LoginPage(),
         homePage: (_) => const HomePage(),
         functionsPage: (_) => const FunctionsPage(),
         functionalityPage: (_) => const FunctionalityPage(),
         locationCompleteDetailsPage: (_) => const LocationCompleteDetailsPage(),
         vsrCompleteDetailsPage: (_) => const VsrCompleteDetailsPage(),
+        palletCompleteDetailsPage: (_) => const PalletCompleteDetailsPage(),
       },
     );
   }
@@ -39,6 +41,7 @@ class App extends StatelessWidget {
   static const functionalityPage = '/functionality-page';
   static const locationCompleteDetailsPage = '/location-complete-details-page';
   static const vsrCompleteDetailsPage = '/vsr-complete-details-page';
+  static const palletCompleteDetailsPage = '/pallet-complete-details-page';
 }
 
 class _UnFocus extends StatelessWidget {

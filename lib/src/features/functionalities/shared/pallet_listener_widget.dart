@@ -1,24 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:wareco_2/src/features/functionalities/functionalities.dart';
 import 'package:wareco_2/src/helpers/extensions.dart';
 
-import 'zebra_listener_widget.dart';
-
-class BoxBarcodeListenerWidget extends StatefulWidget {
-  const BoxBarcodeListenerWidget({
+class PalletListenerWidget extends StatefulWidget {
+  const PalletListenerWidget({
     super.key,
-    required this.onBarcodeListened,
+    required this.onPalletIdListened,
   });
 
-  final void Function(String) onBarcodeListened;
+  final void Function(String) onPalletIdListened;
 
   @override
-  State<BoxBarcodeListenerWidget> createState() =>
-      _BoxBarcodeListenerWidgetState();
+  State<PalletListenerWidget> createState() => _PalletListenerWidgetState();
 }
 
-class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
+class _PalletListenerWidgetState extends State<PalletListenerWidget> {
   late final TextEditingController controller;
   Timer? debounce;
 
@@ -41,7 +39,7 @@ class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
     return ZebraListenerWidget(
       onZebraListened: (value) {
         controller.text = value;
-        widget.onBarcodeListened(value);
+        widget.onPalletIdListened(value);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,19 +47,16 @@ class _BoxBarcodeListenerWidgetState extends State<BoxBarcodeListenerWidget> {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 5),
-            child: Text('Box Barcode:', style: context.italicStyle),
+            child: Text('Pallet ID:', style: context.italicStyle),
           ),
           TextField(
             onChanged: (value) {
               if (debounce?.isActive ?? false) debounce?.cancel();
               debounce = Timer(const Duration(milliseconds: 800), () {
-                widget.onBarcodeListened(value);
+                widget.onPalletIdListened(value);
               });
             },
             controller: controller,
-            keyboardType: TextInputType.multiline,
-            minLines: 2,
-            maxLines: 2,
           ),
         ],
       ),
